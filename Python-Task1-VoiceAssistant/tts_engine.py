@@ -1,7 +1,16 @@
 import pyttsx3
 
-engine = pyttsx3.init()
-
 def speak(text):
+    print("Assistant:", text)
+
+    engine = pyttsx3.init()   # Create a new engine every time
+    engine.setProperty("rate", 170)
+    engine.setProperty("volume", 1.0)
+
+    voices = engine.getProperty("voices")
+    if voices:
+        engine.setProperty("voice", voices[0].id)
+
     engine.say(text)
     engine.runAndWait()
+    engine.stop()
